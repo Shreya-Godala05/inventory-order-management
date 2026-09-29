@@ -1,0 +1,18 @@
+# Maven
+target/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Local configuration and secrets
+.env
+*.log
+src/main/resources/application-local.properties
+
+# Temporary files
+cp.txt
+
+# macOS
+.DS_Store
