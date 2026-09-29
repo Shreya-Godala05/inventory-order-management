@@ -258,3 +258,92 @@ Database transaction management for multi-step orders
 ### Reorder Recommendations
 
 ![Reorder Recommendations](screenshots/05-reorder-recommendations.png)
+
+## Entity Relationship Diagram
+
+```mermaid
+erDiagram
+
+    USERS ||--o{ ORDERS : creates
+    USERS ||--o{ STOCK_TRANSACTIONS : records
+
+    CATEGORIES ||--o{ PRODUCTS : contains
+    SUPPLIERS ||--o{ PRODUCTS : supplies
+
+    CUSTOMERS ||--o{ ORDERS : places
+
+    ORDERS ||--o{ ORDER_ITEMS : contains
+    PRODUCTS ||--o{ ORDER_ITEMS : included_in
+
+    PRODUCTS ||--o{ STOCK_TRANSACTIONS : tracks
+
+    USERS {
+        INT user_id PK
+        VARCHAR username
+        VARCHAR password_hash
+        ENUM role
+        TIMESTAMP created_at
+    }
+
+    CATEGORIES {
+        INT category_id PK
+        VARCHAR category_name
+        VARCHAR description
+    }
+
+    SUPPLIERS {
+        INT supplier_id PK
+        VARCHAR supplier_name
+        VARCHAR contact_person
+        VARCHAR phone
+        VARCHAR email
+        VARCHAR address
+    }
+
+    PRODUCTS {
+        INT product_id PK
+        VARCHAR product_name
+        INT category_id FK
+        INT supplier_id FK
+        DECIMAL unit_price
+        INT stock_quantity
+        INT minimum_stock
+    }
+
+    CUSTOMERS {
+        INT customer_id PK
+        VARCHAR customer_name
+        VARCHAR phone
+        VARCHAR email
+        VARCHAR address
+    }
+
+    ORDERS {
+        INT order_id PK
+        INT customer_id FK
+        INT user_id FK
+        DATETIME order_date
+        DECIMAL total_amount
+        ENUM status
+    }
+
+    ORDER_ITEMS {
+        INT order_item_id PK
+        INT order_id FK
+        INT product_id FK
+        INT quantity
+        DECIMAL unit_price
+        DECIMAL subtotal
+    }
+
+    STOCK_TRANSACTIONS {
+        INT transaction_id PK
+        INT product_id FK
+        INT user_id FK
+        ENUM transaction_type
+        INT quantity
+        DATETIME transaction_date
+        VARCHAR remarks
+    }
+
+
