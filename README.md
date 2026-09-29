@@ -236,3 +236,25 @@ Advanced sales analytics
 Automated supplier purchase orders
 Email notifications for low stock
 Database transaction management for multi-step orders
+
+## Screenshots
+
+### Main Menu — Role-Based Inventory & Order Management
+
+![Main Menu](screenshots/01-main-menu.png)
+
+### Product & Inventory Management
+
+![Product Inventory](screenshots/02-product-inventory.png)
+
+### Multi-Product Order Processing
+
+![Order Processing](screenshots/03-order-processing.png)
+
+### Inventory & Sales Reporting
+
+![Reports](screenshots/04-reports.png)
+
+### Reorder Recommendations
+
+![Reorder Recommendations](screenshots/05-reorder-recommendations.png)
