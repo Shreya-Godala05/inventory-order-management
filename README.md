@@ -4,7 +4,7 @@ A Java-based console application for managing products, inventory, customers, su
 
 ## Overview
 
-The Inventory & Order Management System is designed to simulate a real-world inventory and order workflow.
+The Inventory & Order Management System simulates a real-world inventory and order workflow.
 
 The system supports:
 
@@ -26,11 +26,13 @@ The system supports:
 ## Key Features
 
 ### User Management
+
 - Admin and Staff roles
-- Secure BCrypt password hashing
+- BCrypt password hashing
 - Role-based access to application functions
 
 ### Product Management
+
 - Add products
 - Edit products
 - Delete products
@@ -39,6 +41,7 @@ The system supports:
 - Configure minimum stock levels
 
 ### Inventory Management
+
 - Track current stock quantities
 - Receive new stock
 - Record stock transactions
@@ -47,6 +50,7 @@ The system supports:
 - Generate reorder recommendations
 
 ### Order Management
+
 - Create multi-product orders
 - Calculate order totals
 - Automatically deduct stock when products are sold
@@ -56,6 +60,7 @@ The system supports:
 - Restore stock when a sale is cancelled
 
 ### Reporting
+
 The application provides summary reports including:
 
 - Total orders
@@ -93,7 +98,11 @@ Repository Layer
 JDBC
     ↓
 MySQL Database
+````
 
+## Project Structure
+
+```text
 src/main/java/com/example/inventory
 │
 ├── config
@@ -136,130 +145,22 @@ src/main/java/com/example/inventory
 │   └── PasswordUtil.java
 │
 └── App.java
+```
 
-Database Design
+## Database Design
+
 The system uses the following main tables:
-users
-categories
-suppliers
-products
-customers
-orders
-order_items
-stock_transactions
 
-Relationships include:
-Categories ────────< Products >──────── Suppliers
+* `users`
+* `categories`
+* `suppliers`
+* `products`
+* `customers`
+* `orders`
+* `order_items`
+* `stock_transactions`
 
-Customers ─────────< Orders >──────── Users
-
-Orders ────────────< Order Items >──── Products
-
-Products ──────────< Stock Transactions >──── Users
-
-Security
-Database credentials are stored in a local configuration file:
-src/main/resources/application-local.properties
-This file is excluded from Git using .gitignore.
-Passwords are stored using BCrypt hashing rather than plain text passwords.
-Setup
-1. Clone the repository
-git clone https://github.com/Shreya-Godala05/inventory-order-management.git
-cd inventory-order-management
-2. Configure MySQL
-Create the database:
-CREATE DATABASE inventory_management;
-Create the required tables using the SQL schema for:
-users
-categories
-suppliers
-products
-customers
-orders
-order_items
-stock_transactions
-3. Configure local database credentials
-Create:
-src/main/resources/application-local.properties
-Add:
-db.url=jdbc:mysql://127.0.0.1:3306/inventory_management
-db.username=root
-db.password=YOUR_MYSQL_PASSWORD
-Do not commit this file to GitHub.
-4. Build the project
-mvn clean compile
-5. Run the application
-mvn exec:java
-Example Workflow
-A typical workflow is:
-Login
-  ↓
-View/Search Products
-  ↓
-Create Customer
-  ↓
-Create Multi-Product Order
-  ↓
-Stock Automatically Deducted
-  ↓
-Confirm Order
-  ↓
-Complete Order
-  ↓
-View Reports
-  ↓
-Review Low Stock
-  ↓
-Receive New Stock
-Learning Outcomes
-This project demonstrates practical experience with:
-Java OOP
-Layered application architecture
-JDBC database connectivity
-SQL and relational database design
-CRUD operations
-Authentication and authorization
-Password security
-Inventory workflows
-Order processing
-Transaction logging
-Business-rule implementation
-Maven dependency management
-Git and GitHub
-Future Enhancements
-Possible future improvements include:
-Graphical user interface or web interface
-REST API
-Spring Boot migration
-Dashboard and data visualization
-Advanced sales analytics
-Automated supplier purchase orders
-Email notifications for low stock
-Database transaction management for multi-step orders
-
-## Screenshots
-
-### Main Menu — Role-Based Inventory & Order Management
-
-![Main Menu](screenshots/01-main-menu.png)
-
-### Product & Inventory Management
-
-![Product Inventory](screenshots/02-product-inventory.png)
-
-### Multi-Product Order Processing
-
-![Order Processing](screenshots/03-order-processing.png)
-
-### Inventory & Sales Reporting
-
-![Reports](screenshots/04-reports.png)
-
-### Reorder Recommendations
-
-![Reorder Recommendations](screenshots/05-reorder-recommendations.png)
-
-## Entity Relationship Diagram
+### Entity Relationship Diagram
 
 ```mermaid
 erDiagram
@@ -345,5 +246,154 @@ erDiagram
         DATETIME transaction_date
         VARCHAR remarks
     }
+```
 
+## Security
+
+Database credentials are stored in a local configuration file:
+
+```text
+src/main/resources/application-local.properties
+```
+
+This file is excluded from Git using `.gitignore`.
+
+Passwords are stored using BCrypt hashing rather than plain-text passwords.
+
+## Screenshots
+
+### Main Menu — Role-Based Inventory & Order Management
+
+![Main Menu](screenshots/01-main-menu.png)
+
+### Product & Inventory Management
+
+![Product Inventory](screenshots/02-product-inventory.png)
+
+### Multi-Product Order Processing
+
+![Order Processing](screenshots/03-order-processing.png)
+
+### Inventory & Sales Reporting
+
+![Reports](screenshots/04-reports.png)
+
+### Reorder Recommendations
+
+![Reorder Recommendations](screenshots/05-reorder-recommendations.png)
+
+## Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Shreya-Godala05/inventory-order-management.git
+cd inventory-order-management
+```
+
+### 2. Configure MySQL
+
+Create the database:
+
+```sql
+CREATE DATABASE inventory_management;
+```
+
+Create the required tables:
+
+* `users`
+* `categories`
+* `suppliers`
+* `products`
+* `customers`
+* `orders`
+* `order_items`
+* `stock_transactions`
+
+### 3. Configure Local Database Credentials
+
+Create:
+
+```text
+src/main/resources/application-local.properties
+```
+
+Add:
+
+```properties
+db.url=jdbc:mysql://127.0.0.1:3306/inventory_management
+db.username=root
+db.password=YOUR_MYSQL_PASSWORD
+```
+
+Do not commit this file to GitHub.
+
+### 4. Build the Project
+
+```bash
+mvn clean compile
+```
+
+### 5. Run the Application
+
+```bash
+mvn exec:java
+```
+
+## Example Workflow
+
+```text
+Login
+  ↓
+View/Search Products
+  ↓
+Create Customer
+  ↓
+Create Multi-Product Order
+  ↓
+Stock Automatically Deducted
+  ↓
+Confirm Order
+  ↓
+Complete Order
+  ↓
+View Reports
+  ↓
+Review Low Stock
+  ↓
+Receive New Stock
+```
+
+## Learning Outcomes
+
+This project demonstrates practical experience with:
+
+* Java OOP
+* Layered application architecture
+* JDBC database connectivity
+* SQL and relational database design
+* CRUD operations
+* Authentication and authorization
+* Password security
+* Inventory workflows
+* Order processing
+* Transaction logging
+* Business-rule implementation
+* Maven dependency management
+* Git and GitHub
+
+## Future Enhancements
+
+Possible future improvements include:
+
+* Graphical user interface or web interface
+* REST API
+* Spring Boot migration
+* Dashboard and data visualization
+* Advanced sales analytics
+* Automated supplier purchase orders
+* Email notifications for low stock
+* Database transaction management for multi-step orders
+
+````
 
